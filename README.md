@@ -203,7 +203,7 @@ The Blueprint provisions:
 - Public static frontend service
 - Public FastAPI backend service
 - Managed Postgres database
-- Automatic DB setup and sample data seeding during deploy
+- Automatic DB setup and sample data seeding on backend startup
 
 ## CI/CD
 
