@@ -258,7 +258,7 @@ const Dashboard = () => {
         fontSize: '12px'
       }
     },
-      React.createElement('p', null, '🌾 KrishiQuery - Empowering Indian Farmers with Voice Technology'),
+      React.createElement('p', null, '🌾 KrishiQuery - Empowering Indian Farmers with New Technology'),
       React.createElement('p', null, '© 2026 KrishiQuery | Support: 1800-XXX-XXXX')
     )
   );
