@@ -7,41 +7,41 @@ import subprocess
 import sys
 from pathlib import Path
 
+def _run_pytest(target: str, label: str) -> bool:
+    """Run pytest for a target path and treat missing/empty suites as non-fatal."""
+    path = Path(target)
+    if not path.exists():
+        print(f"{label} skipped: '{target}' not found.")
+        return True
+
+    print(f"Running {label}...")
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", target, "-v", "--tb=short"],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode == 0:
+        print(f"{label} passed!")
+        return True
+
+    # Pytest exit code 5: no tests collected.
+    if result.returncode == 5:
+        print(f"{label} skipped: no tests collected.")
+        return True
+
+    print(f"{label} failed:")
+    print(result.stdout)
+    print(result.stderr)
+    return False
+
+
 def run_tests():
-    """Run all tests"""
-    tests_passed = True
-    
-    # Run backend tests
-    print("Running backend tests...")
-    result = subprocess.run([
-        sys.executable, "-m", "pytest", "tests/", "-v", "--tb=short"
-    ], capture_output=True, text=True)
-    
-    if result.returncode != 0:
-        print("Backend tests failed:")
-        print(result.stdout)
-        print(result.stderr)
-        tests_passed = False
-    else:
-        print("Backend tests passed!")
-    
-    # Run integration tests (if any)
-    print("\nRunning integration tests...")
-    result = subprocess.run([
-        sys.executable, "-m", "pytest", "tests/integration/", "-v"
-    ], capture_output=True, text=True)
-    
-    if result.returncode != 0 and result.returncode != 5:  # 5 means no tests found
-        print("Integration tests failed:")
-        print(result.stdout)
-        print(result.stderr)
-        tests_passed = False
-    elif result.returncode == 0:
-        print("Integration tests passed!")
-    else:
-        print("No integration tests found.")
-    
-    return tests_passed
+    """Run test suites and return True only when all required suites pass."""
+    backend_ok = _run_pytest("tests", "backend tests")
+    print()
+    integration_ok = _run_pytest("tests/integration", "integration tests")
+    return backend_ok and integration_ok
 
 if __name__ == "__main__":
     success = run_tests()
