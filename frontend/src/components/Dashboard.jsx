@@ -141,7 +141,7 @@ const Dashboard = () => {
   ];
 
   const features = [
-    { icon: '💸', title: 'Payment Status', desc: 'PM-KISAN & KALIA updates' },
+    { icon: '💸', title: 'Payment Status', desc: 'PM-KISAN & KALIA YOJNA updates' },
     { icon: '📊', title: 'Mandi Prices', desc: 'Real-time crop rates' },
     { icon: '🌱', title: 'Soil Health', desc: 'Test reports & advice' },
     { icon: '☀️', title: 'Weather Forecast', desc: '7-day prediction' }
