@@ -14,6 +14,7 @@ from datetime import datetime
 from backend.models.query import QueryResult
 from backend.services.farmer_service import FarmerService
 
+
 logger = logging.getLogger(__name__)
 
 class QueryService:
@@ -483,3 +484,43 @@ class QueryService:
         }
         
         return messages.get(error_type, {}).get(language, messages.get(error_type, {}).get("en", "An error occurred."))
+    
+# In your query_service.py, add:
+
+from services.weather_service import OpenMeteoService
+
+weather_service = OpenMeteoService()
+
+async def _handle_weather_query(self, question: str, entities: dict, language: str):
+    """Handle weather-related queries with real API data"""
+    location = entities.get("location", "Bhubaneswar")
+    
+    # Get real weather data
+    forecast = await weather_service.get_weather_forecast(location)
+    
+    if not forecast or len(forecast) == 0:
+        return {"answer": self._get_error_message("no_data", language), "data": None}
+    
+    # Format response based on language
+    if language == "hi":
+        answer = f"📍 {location} के लिए मौसम पूर्वानुमान:\n"
+        for day in forecast[:3]:
+            answer += f"\n📅 {day['date']}: {day['condition']}\n"
+            answer += f"   🌡️ तापमान: {day['min_temp']}°C - {day['max_temp']}°C\n"
+            answer += f"   💧 वर्षा: {day['rainfall']} मिमी\n"
+    else:
+        answer = f"📍 Weather forecast for {location}:\n"
+        for day in forecast[:3]:
+            answer += f"\n📅 {day['date']}: {day['condition']}\n"
+            answer += f"   🌡️ Temperature: {day['min_temp']}°C - {day['max_temp']}°C\n"
+            answer += f"   💧 Rainfall: {day['rainfall']}mm\n"
+    
+    # Check if rain is expected (for "will it rain" questions)
+    if "rain" in question.lower() or "बारिश" in question:
+        rain_days = [d for d in forecast[:5] if d.get('rainfall', 0) > 0]
+        if rain_days:
+            answer += f"\n\n⚠️ बारिश की संभावना: {len(rain_days)} दिनों में वर्षा होगी"
+        else:
+            answer += f"\n\n✅ अगले 5 दिनों में बारिश नहीं होगी"
+    
+    return {"answer": answer, "data": forecast}
