@@ -291,7 +291,7 @@ const Dashboard = () => {
 
     React.createElement('div', { style: styles.footer },
       React.createElement('p', null, '🌾 KrishiQuery - Empowering Indian Farmers'),
-      React.createElement('p', null, '© 2025 KrishiQuery | Support: 1800-XXX-XXXX')
+      React.createElement('p', null, '© 2026 KrishiQuery | Support: 1800-XXX-XXXX')
     )
   );
 };
