@@ -1,0 +1,22 @@
+id,question,intent,language,difficulty
+1,मेरी PM-KISAN की किश्त आई क्या?,PAYMENT,hi,easy
+2,मुझे KALIA से कितना पैसा मिला है?,PAYMENT,hi,easy
+3,मेरी अंतिम किश्त कब आई?,PAYMENT,hi,medium
+4,क्या मेरा PM-KISAN भुगतान आ गया?,PAYMENT,hi,medium
+5,भुवनेश्वर में धान का भाव क्या है?,PRICE,hi,easy
+6,कटक मंडी में गेहूं के क्या दाम हैं?,PRICE,hi,easy
+7,आज टमाटर का मंडी भाव बताएं,PRICE,hi,medium
+8,सबसे सस्ती सब्जी कौन सी है?,PRICE,hi,hard
+9,मेरी मिट्टी की रिपोर्ट दिखाओ,SOIL,hi,easy
+10,मेरे खेत में नाइट्रोजन की कमी है क्या?,SOIL,hi,medium
+11,मिट्टी का पीएच मान कैसे सुधारें?,SOIL,hi,hard
+12,अगले हफ्ते बारिश होगी क्या?,WEATHER,hi,easy
+13,कल का तापमान कितना रहेगा?,WEATHER,hi,medium
+14,इस महीने कितनी बारिश हुई?,WEATHER,hi,hard
+15,Show my PM-KISAN payment status,PAYMENT,en,easy
+16,What is the price of paddy in Bhubaneswar?,PRICE,en,easy
+17,Display my soil health report,SOIL,en,easy
+18,Will it rain tomorrow?,WEATHER,en,easy
+19,How many KALIA payments have I received?,PAYMENT,en,medium
+20,Which crop has the highest price now?,PRICE,en,medium
+(Continue to 2000 records...)

@@ -1,0 +1,21 @@
+farmer_id,name,phone,village,district,land_size,created_at
+1,Ramesh Chandra Patra,9876543210,Balianta,Khordha,2.5,2024-01-01
+2,Sukanti Devi,9876543211,Sakhigopal,Puri,1.8,2024-01-02
+3,Bijay Kumar Das,9876543212,Choudwar,Cuttack,3.2,2024-01-03
+4,Pravati Mahapatra,9876543213,Berhampur,Ganjam,2.0,2024-01-04
+5,Gopinath Behera,9876543214,Remuna,Balasore,1.5,2024-01-05
+6,Sarojini Naik,9876543215,Sambalpur,Sambalpur,2.8,2024-01-06
+7,Manoranjan Rout,9876543216,Rourkela,Sundergarh,4.0,2024-01-07
+8,Tulasi Munda,9876543217,Koraput,Koraput,1.2,2024-01-08
+9,Bhagaban Sahu,9876543218,Bhadrak,Bhadrak,2.2,2024-01-09
+10,Kanchan Pradhan,9876543219,Dhenkanal,Dhenkanal,3.5,2024-01-10
+11,Laxmipriya Nayak,9876543220,Jajpur,Jajpur,1.9,2024-01-11
+12,Prasanta Mohanty,9876543221,Kendrapara,Kendrapara,2.7,2024-01-12
+13,Sabita Mallick,9876543222,Puri,Puri,1.4,2024-01-13
+14,Bibhuti Bhusan,9876543223,Balasore,Balasore,3.0,2024-01-14
+15,Ranjita Swain,9876543224,Cuttack,Cuttack,2.3,2024-01-15
+16,Debendra Majhi,9876543225,Kalahandi,Kalahandi,1.7,2024-01-16
+17,Sangita Sethy,9876543226,Mayurbhanj,Mayurbhanj,2.1,2024-01-17
+18,Pradeep Kumar,9876543227,Angul,Angul,4.2,2024-01-18
+19,Rina Das,9876543228,Jagatsinghpur,Jagatsinghpur,1.3,2024-01-19
+20,Suresh Sahu,9876543229,Nuapada,Nuapada,2.5,2024-01-20

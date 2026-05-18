@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: krishiquery-postgres
+    environment:
+      POSTGRES_DB: krishiquery_db
+      POSTGRES_USER: krishiquery_user
+      POSTGRES_PASSWORD: secure_password_here
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../data/databases/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - krishiquery-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U krishiquery_user -d krishiquery_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: krishiquery-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - krishiquery-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    container_name: krishiquery-backend
+    environment:
+      DATABASE_URL: postgresql://krishiquery_user:secure_password_here@postgres:5432/krishiquery_db
+      REDIS_URL: redis://redis:6379/0
+      BHASHINI_API_KEY: ${BHASHINI_API_KEY}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+      API_KEY: ${API_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      ENVIRONMENT: production
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - krishiquery-network
+    volumes:
+      - ../models:/app/models
+      - ../logs:/app/logs
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --workers 4
+
+  # Frontend (Nginx)
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../deployment/Dockerfile.frontend
+    container_name: krishiquery-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - krishiquery-network
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: krishiquery-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - krishiquery-network
+
+volumes:
+  postgres_data:
+
+networks:
+  krishiquery-network:
+    driver: bridge

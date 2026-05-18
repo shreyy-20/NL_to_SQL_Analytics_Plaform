@@ -1,0 +1,202 @@
+{
+  "version": "1.0",
+  "language": "multilingual",
+  "terms": {
+    "crops": {
+      "paddy": {
+        "hi": "धान",
+        "or": "ଧାନ",
+        "en": "Paddy",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "wheat": {
+        "hi": "गेहूं",
+        "or": "ଗହମ",
+        "en": "Wheat",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "maize": {
+        "hi": "मक्का",
+        "or": "ମକା",
+        "en": "Maize",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "mustard": {
+        "hi": "सरसों",
+        "or": "ସୋରିଷ",
+        "en": "Mustard",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "groundnut": {
+        "hi": "मूंगफली",
+        "or": "ଚିନାବାଦାମ",
+        "en": "Groundnut",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "vegetables": {
+        "hi": "सब्जियाँ",
+        "or": "ପନିପରିବା",
+        "en": "Vegetables",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "tomato": {
+        "hi": "टमाटर",
+        "or": "ଟମାଟୋ",
+        "en": "Tomato",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "potato": {
+        "hi": "आलू",
+        "or": "ଆଳୁ",
+        "en": "Potato",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      },
+      "onion": {
+        "hi": "प्याज",
+        "or": "ପିଆଜ",
+        "en": "Onion",
+        "db_column": "crop",
+        "table": "mandi_prices"
+      }
+    },
+    "schemes": {
+      "pmkisan": {
+        "hi": "पीएम किसान",
+        "or": "ପିଏମ୍ କିସାନ",
+        "en": "PM-KISAN",
+        "db_table": "pmkisan_payments",
+        "amount": 6000,
+        "installments": 3
+      },
+      "kalia": {
+        "hi": "कलिया",
+        "or": "କଳିଆ",
+        "en": "KALIA",
+        "db_table": "kalia_payments",
+        "types": ["input_subsidy", "livelihood_support", "life_insurance"]
+      }
+    },
+    "soil_parameters": {
+      "nitrogen": {
+        "hi": "नाइट्रोजन",
+        "or": "ନାଇଟ୍ରୋଜେନ",
+        "en": "Nitrogen",
+        "db_column": "nitrogen",
+        "unit": "kg/ha"
+      },
+      "phosphorus": {
+        "hi": "फास्फोरस",
+        "or": "ଫସଫରସ",
+        "en": "Phosphorus",
+        "db_column": "phosphorus",
+        "unit": "kg/ha"
+      },
+      "potassium": {
+        "hi": "पोटाश",
+        "or": "ପୋଟାସ",
+        "en": "Potassium",
+        "db_column": "potassium",
+        "unit": "kg/ha"
+      },
+      "ph": {
+        "hi": "पीएच मान",
+        "or": "ପିଏଚ୍ ମାନ",
+        "en": "pH Value",
+        "db_column": "ph",
+        "range": [0, 14]
+      },
+      "organic_carbon": {
+        "hi": "कार्बनिक कार्बन",
+        "or": "ଜୈବିକ କାର୍ବନ",
+        "en": "Organic Carbon",
+        "db_column": "organic_carbon",
+        "unit": "%"
+      }
+    },
+    "payment_status": {
+      "pending": {
+        "hi": "लंबित",
+        "or": "ବାକି",
+        "en": "Pending"
+      },
+      "processed": {
+        "hi": "प्रक्रियाधीन",
+        "or": "ପ୍ରକ୍ରିୟାଧୀନ",
+        "en": "Processing"
+      },
+      "completed": {
+        "hi": "जारी",
+        "or": "ଜାରି",
+        "en": "Completed"
+      },
+      "failed": {
+        "hi": "विफल",
+        "or": "ବିଫଳ",
+        "en": "Failed"
+      }
+    },
+    "districts_odisha": [
+      "Angul", "Balangir", "Balasore", "Bargarh", "Bhadrak", "Boudh", "Cuttack",
+      "Deogarh", "Dhenkanal", "Gajapati", "Ganjam", "Jagatsinghpur", "Jajpur",
+      "Jharsuguda", "Kalahandi", "Kandhamal", "Kendrapara", "Kendujhar", "Khordha",
+      "Koraput", "Malkangiri", "Mayurbhanj", "Nabarangpur", "Nayagarh", "Nuapada",
+      "Puri", "Rayagada", "Sambalpur", "Subarnapur", "Sundergarh"
+    ],
+    "mandis_odisha": [
+      {"name": "Bhubaneswar Mandi", "district": "Khordha"},
+      {"name": "Cuttack Mandi", "district": "Cuttack"},
+      {"name": "Puri Mandi", "district": "Puri"},
+      {"name": "Balasore Mandi", "district": "Balasore"},
+      {"name": "Sambalpur Mandi", "district": "Sambalpur"},
+      {"name": "Rourkela Mandi", "district": "Sundergarh"},
+      {"name": "Berhampur Mandi", "district": "Ganjam"}
+    ],
+    "query_templates": {
+      "payment_check": {
+        "hi": "मेरी {scheme} की किश्त की जाँच करें",
+        "or": "ମୋର {scheme} କିସ୍ତି ଯାଞ୍ଚ କରନ୍ତୁ",
+        "en": "Check my {scheme} installment"
+      },
+      "price_check": {
+        "hi": "{mandi} में {crop} का भाव क्या है?",
+        "or": "{mandi} ରେ {crop} ର ଭାବ କେତେ?",
+        "en": "What is the price of {crop} in {mandi}?"
+      },
+      "soil_report": {
+        "hi": "मेरी मिट्टी की रिपोर्ट दिखाएं",
+        "or": "ମୋର ମାଟି ରିପୋର୍ଟ ଦେଖାନ୍ତୁ",
+        "en": "Show my soil report"
+      },
+      "weather_forecast": {
+        "hi": "{days} दिनों का मौसम पूर्वानुमान",
+        "or": "{days} ଦିନର ପାଣିପାଗ ପୂର୍ବାନୁମାନ",
+        "en": "{days} day weather forecast"
+      }
+    },
+    "common_phrases": {
+      "greetings": {
+        "hi": ["नमस्ते", "प्रणाम", "नमस्कार"],
+        "or": ["ନମସ୍କାର", "ପ୍ରଣାମ"],
+        "en": ["hello", "hi", "namaste"]
+      },
+      "thanks": {
+        "hi": ["धन्यवाद", "शुक्रिया"],
+        "or": ["ଧନ୍ୟବାଦ"],
+        "en": ["thank you", "thanks", "dhanyavad"]
+      },
+      "help_requests": {
+        "hi": ["मदद", "सहायता", "बताएं", "कैसे"],
+        "or": ["ସହାୟତା", "ବତାନ୍ତୁ", "କିପରି"],
+        "en": ["help", "how to", "tell me"]
+      }
+    }
+  }
+}

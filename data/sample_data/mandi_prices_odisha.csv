@@ -1,0 +1,14 @@
+id,crop,market,district,price,date,variety,grade
+1,Paddy,Bhubaneswar Mandi,Khordha,1950,2024-03-01,Swarna,A
+2,Paddy,Cuttack Mandi,Cuttack,1920,2024-03-01,Swarna,A
+3,Paddy,Puri Mandi,Puri,1900,2024-03-01,Swarna,B
+4,Wheat,Bhubaneswar Mandi,Khordha,2250,2024-03-01,Lok-1,A
+5,Wheat,Balasore Mandi,Balasore,2200,2024-03-01,Lok-1,A
+6,Maize,Sambalpur Mandi,Sambalpur,2050,2024-03-01,Hybrid,A
+7,Maize,Rourkela Mandi,Sundergarh,2000,2024-03-01,Hybrid,A
+8,Mustard,Bhubaneswar Mandi,Khordha,5800,2024-03-01,Varuna,A
+9,Tomato,Bhubaneswar Mandi,Khordha,1200,2024-03-01,Local,A
+10,Tomato,Cuttack Mandi,Cuttack,1150,2024-03-01,Local,A
+11,Potato,Puri Mandi,Puri,1500,2024-03-01,Kufri,A
+12,Onion,Bhubaneswar Mandi,Khordha,1800,2024-03-01,Nasik,A
+(Continue to 2000 records...)
