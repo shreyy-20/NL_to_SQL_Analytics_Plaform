@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { farmerService } from '../services/api';
 
 const FarmerSearch = () => {
   const [phone, setPhone] = useState('');
@@ -7,7 +8,7 @@ const FarmerSearch = () => {
   const [error, setError] = useState('');
 
   const searchFarmer = async () => {
-    if (!phone || phone.length !== 10) {
+    if (!/^[6-9]\d{9}$/.test(phone)) {
       setError('Please enter a valid 10-digit phone number');
       return;
     }
@@ -17,12 +18,15 @@ const FarmerSearch = () => {
     setFarmer(null);
 
     try {
-      const response = await fetch(`/api/farmers/${phone}`);
-      if (!response.ok) throw new Error('Farmer not found');
-      const data = await response.json();
-      setFarmer(data);
+      const response = await farmerService.getFarmerByPhone(phone);
+      setFarmer(response.data);
     } catch (err) {
-      setError(err.message);
+      const backendMessage =
+        err?.response?.data?.detail ||
+        err?.response?.data?.error ||
+        err?.message ||
+        'Unable to reach backend service.';
+      setError(backendMessage);
     } finally {
       setLoading(false);
     }
