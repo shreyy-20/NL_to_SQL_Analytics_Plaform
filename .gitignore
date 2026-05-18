@@ -52,6 +52,8 @@ models/*.onnx
 *.temp
 *.bak
 *.backup
+*.db-journal
+tmp_write_test.txt
 
 # Test coverage
 .coverage
