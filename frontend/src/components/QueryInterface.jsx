@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { queryService } from '../services/api';
 
 const QueryInterface = () => {
   const [phone, setPhone] = useState('9876543210');
@@ -13,34 +14,47 @@ const QueryInterface = () => {
       return;
     }
 
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      alert('Please enter a valid 10-digit Indian mobile number');
+      return;
+    }
+
     setLoading(true);
     setResponse(null);
     
     try {
-      const res = await fetch('/api/queries/', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          question: question,
-          phone_number: phone,
-          language: language
-        })
-      });
-      
-      const data = await res.json();
-      setResponse(data);
+      const res = await queryService.processQuery(question, phone, language);
+      setResponse(res.data);
     } catch (error) {
-      setResponse({ answer: `Error: ${error.message}. Make sure backend is running on port 8000.` });
+      const backendMessage =
+        error?.response?.data?.detail ||
+        error?.response?.data?.error ||
+        error?.response?.data?.answer ||
+        error?.message ||
+        'Unable to reach backend service.';
+
+      const configuredApi =
+        process.env.REACT_APP_API_URL || 'http://localhost:8000 (default fallback)';
+
+      setResponse({
+        answer: `Error: ${backendMessage}. API base: ${configuredApi}`
+      });
     } finally {
       setLoading(false);
     }
   };
 
   const sampleQuestions = {
-    hi: ['???? PM-KISAN ?? ????? ?? ?????', '????????? ??? ??? ?? ??? ???? ???', '???? ?????? ?? ??????? ?????', '???? ????? ????? ???? ?????'],
-    or: ['??? PM-KISAN ?????? ????? ???', '??????????? ???? ????? ?????'],
+    hi: [
+      'मेरी PM-KISAN की किस्त आई क्या?',
+      'भुवनेश्वर मंडी में धान का भाव क्या है?',
+      'मेरी मिट्टी परीक्षण रिपोर्ट दिखाओ',
+      'अगले हफ्ते बारिश होगी क्या?'
+    ],
+    or: [
+      'ମୋ PM-KISAN କିଷ୍ଟି ଆସିଛି କି?',
+      'ଭୁବନେଶ୍ୱର ମଣ୍ଡିରେ ଧାନ ଦାମ କେତେ?'
+    ],
     en: ['Did my PM-KISAN installment come?', 'What is the price of paddy in Bhubaneswar?', 'Show my soil health report', 'Will it rain next week?']
   };
 
@@ -62,8 +76,8 @@ const QueryInterface = () => {
       <div style={{ marginBottom: '15px' }}>
         <label><strong>Language:</strong></label><br />
         <select value={language} onChange={(e) => setLanguage(e.target.value)} style={{ padding: '8px', marginTop: '5px', width: '200px', border: '1px solid #ccc', borderRadius: '4px' }}>
-          <option value="hi">?????? (Hindi)</option>
-          <option value="or">????? (Odia)</option>
+          <option value="hi">हिंदी (Hindi)</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
           <option value="en">English</option>
         </select>
       </div>
