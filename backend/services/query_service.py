@@ -368,8 +368,9 @@ class QueryService:
             latest = data[0]
             
             answer = f"Dear {farmer.name}, "
-            answer += f"Total payments received: ₹{total_amount:,.2f}. "
-            answer += f"Latest payment: ₹{latest.get('amount', 0):,.2f} on {latest.get('payment_date', 'N/A')}."
+            answer += f"Total payments in available records: Rs {total_amount:,.2f}. "
+            answer += f"Latest recorded payment: Rs {latest.get('amount', 0):,.2f} on {latest.get('payment_date', 'N/A')}."
+            answer += " Note: this result is from the currently seeded demo dataset, not a live government feed."
             
             return {"answer": answer, "structured_data": data[:3]}
     
