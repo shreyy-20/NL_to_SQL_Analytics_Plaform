@@ -2,6 +2,24 @@
 
 KrishiQuery is a voice-enabled natural language query platform for Indian agriculture workflows (currently Odisha-focused sample data). It lets users query farmer records, payment history, mandi prices, and soil health using Hindi, Odia, or English inputs.
 
+## Live Demo (Public)
+
+This repository now includes a Render Blueprint at `render.yaml`, so you can publish a public demo website from GitHub.
+
+Deploy button:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shreyy-20/NL_to_SQL_Analytics_Plaform)
+
+After first deploy, share these links with anyone:
+
+- Frontend demo URL: `https://<your-frontend-service>.onrender.com`
+- API docs URL: `https://<your-backend-service>.onrender.com/docs`
+
+Notes:
+
+- Free-tier services can sleep when idle and take ~30-60 seconds to wake up.
+- Voice/IVR are disabled by default in this demo deployment.
+
 ## What This Project Includes
 
 - FastAPI backend with modular API routers
@@ -169,6 +187,23 @@ This composes:
 - Optional reverse proxy service
 
 Before production-style runs, set secure values for DB credentials and secrets in environment variables.
+
+## Deploy on Render
+
+1. Push latest code to GitHub (including `render.yaml`).
+2. Open the Deploy to Render button above.
+3. Select your Render workspace and create resources.
+4. Wait for first deploy to finish for both services:
+   - `krishiquery-backend`
+   - `krishiquery-frontend`
+5. Open the frontend `.onrender.com` URL and test the demo.
+
+The Blueprint provisions:
+
+- Public static frontend service
+- Public FastAPI backend service
+- Managed Postgres database
+- Automatic DB setup and sample data seeding during deploy
 
 ## CI/CD
 
