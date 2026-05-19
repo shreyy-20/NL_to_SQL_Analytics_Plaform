@@ -487,7 +487,7 @@ class QueryService:
     
 # In your query_service.py, add:
 
-from services.weather_service import OpenMeteoService
+from backend.services.weather_service import OpenMeteoService
 
 weather_service = OpenMeteoService()
 
