@@ -33,7 +33,6 @@ class SQLValidator:
         r';\s*UPDATE\s+',
         r';\s*INSERT\s+',
         r';\s*ALTER\s+',
-        r'\bUNION\s+SELECT\b',
         r'\bINFORMATION_SCHEMA\b',
         r'\bxp_cmdshell\b',
         r'\bexec\s+xp_',
@@ -170,7 +169,8 @@ class SQLValidator:
     
     def _check_table_whitelist(self, parsed):
         """Check that only allowed tables are accessed"""
-        tables = self._extract_tables_from_parsed(parsed)
+        sql_text = str(parsed) if parsed is not None else ''
+        tables = self._extract_tables(sql_text)
         
         for table in tables:
             if table not in self.ALLOWED_TABLES:

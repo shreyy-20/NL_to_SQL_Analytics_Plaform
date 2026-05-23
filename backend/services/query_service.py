@@ -164,6 +164,9 @@ class QueryService:
         try:
             predictor = self._get_intent_classifier()
             result = predictor.predict(question, language)
+            if result.get("confidence", 0) < 0.5:
+                logger.warning("Intent model low confidence, falling back to keyword-based classification")
+                return self._keyword_based_intent(question, language)
             return result
         except Exception as e:
             logger.error(f"Intent classification failed: {e}")
@@ -175,7 +178,9 @@ class QueryService:
         question_lower = question.lower()
         
         # Payment keywords
-        payment_keywords = ["pmkisan", "pm-kisan", "किश्त", "भुगतान", "पैसा", "kalia", "कलिया"]
+        payment_keywords = [
+            "pmkisan", "pm-kisan", "pm kisan", "पीएम किसान", "किश्त", "किस्त", "भुगतान", "पैसा", "kalia", "कलिया"
+        ]
         if any(kw in question_lower for kw in payment_keywords):
             return {"intent": "PAYMENT", "confidence": 0.7, "entities": {}}
         

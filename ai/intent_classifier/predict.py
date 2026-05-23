@@ -62,8 +62,8 @@ class IntentPredictor:
         
         # Payment-related keywords
         payment_keywords = [
-            "pmkisan", "pm-kisan", "kalia", "किश्त", "भुगतान", "पैसा",
-            "payment", "installment", "पीएम किसान", "कलिया"
+            "pmkisan", "pm-kisan", "pm kisan", "पीएम किसान", "किश्त", "किस्त", "भुगतान", "पैसा",
+            "payment", "installment", "kalia", "कलिया"
         ]
         if any(kw in text_lower for kw in payment_keywords):
             return {
