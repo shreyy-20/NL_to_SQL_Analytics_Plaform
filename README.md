@@ -1,250 +1,433 @@
-# KrishiQuery
+# KrishiQuery 🌾
 
-KrishiQuery is a voice-enabled natural language query platform for Indian agriculture workflows (currently Odisha-focused sample data). It lets users query farmer records, payment history, mandi prices, and soil health using Hindi, Odia, or English inputs.
+### AI-Powered Agricultural Intelligence Platform for Indian Farmers
 
-## Live Demo (Public)
+KrishiQuery is a multilingual, voice-enabled agricultural analytics platform designed to simplify access to farmer records, payment history, mandi prices, and soil health insights through natural language interactions.
 
-This repository now includes a Render Blueprint at `render.yaml`, so you can publish a public demo website from GitHub.
+Built with a scalable FastAPI + React architecture, the platform enables farmers and agricultural operators to query structured agricultural datasets using Hindi, Odia, or English — without requiring technical expertise.
 
-Deploy button:
+Currently optimized with Odisha-focused sample datasets, the system demonstrates how AI-driven natural language interfaces can modernize rural agricultural workflows and government scheme accessibility.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shreyy-20/NL_to_SQL_Analytics_Plaform)
+---
 
-After first deploy, share these links with anyone:
+# ✨ Key Features
 
-- Frontend demo URL: `https://<your-frontend-service>.onrender.com`
-- API docs URL: `https://<your-backend-service>.onrender.com/docs`
+## 🌐 Multilingual Natural Language Queries
 
-Notes:
+Ask questions in:
 
-- Free-tier services can sleep when idle and take ~30-60 seconds to wake up.
-- Voice/IVR are disabled by default in this demo deployment.
+* English
+* Hindi
+* Odia
 
-## What This Project Includes
+Example:
 
-- FastAPI backend with modular API routers
-- SQLAlchemy data access layer with SQLite/PostgreSQL support
-- Natural language query pipeline:
-  - intent classification
-  - SQL generation
-  - safe SQL execution (SELECT-only guardrails)
-  - localized response formatting
-- Optional voice services (Bhashini STT/TTS) and IVR hooks (Twilio)
-- React frontend for dashboard, farmer search, and query interaction
-- Docker assets for local containerized deployment
-- GitHub Actions CI workflow for basic validation on push
+> “Did my PM-KISAN installment arrive?”
 
-## Tech Stack
+The platform automatically:
 
-- Backend: Python, FastAPI, SQLAlchemy, Pydantic, Uvicorn
-- Data: SQLite (default local) or PostgreSQL (container/production path)
-- Frontend: React (Create React App), Axios
-- Optional integrations: Redis, Bhashini, Twilio
-- Monitoring: Prometheus metrics endpoint (`/metrics`)
-- CI: GitHub Actions (`.github/workflows/ci.yml`)
+1. Detects intent
+2. Generates safe SQL queries
+3. Retrieves structured data
+4. Returns localized responses
 
-## Repository Structure
+---
+
+## 🎙 Voice-Enabled Query System
+
+Integrated voice workflow support using:
+
+* Speech-to-Text (STT)
+* Text-to-Speech (TTS)
+* Optional IVR integrations
+
+Supported through:
+
+* Bhashini APIs
+* Twilio IVR hooks
+
+---
+
+## 📊 Agricultural Data Intelligence
+
+The platform provides access to:
+
+* Farmer profile records
+* Government payment history
+* Soil health reports
+* Mandi pricing insights
+* Dashboard analytics
+
+---
+
+## 🔐 Secure AI-to-SQL Pipeline
+
+KrishiQuery includes a protected natural language to SQL engine with:
+
+* Intent classification
+* SQL validation
+* SELECT-only execution guardrails
+* Safe runtime query handling
+
+This prevents unsafe database mutations while enabling flexible querying capabilities.
+
+---
+
+# 🏗 System Architecture
+
+```text
+User Query (Voice/Text)
+        │
+        ▼
+Intent Classification
+        │
+        ▼
+AI SQL Generation
+        │
+        ▼
+SQL Validation Layer
+        │
+        ▼
+Database Execution
+        │
+        ▼
+Localized Response Formatting
+        │
+        ▼
+Frontend Dashboard / Voice Output
+```
+
+---
+
+# 🚀 Tech Stack
+
+## Backend
+
+* Python
+* FastAPI
+* SQLAlchemy
+* Pydantic
+* Uvicorn
+
+## Frontend
+
+* React.js
+* Axios
+
+## Database
+
+* SQLite
+* PostgreSQL
+
+## AI & Voice Services
+
+* Bhashini APIs
+* Twilio IVR
+* Rule-based fallback NLP pipeline
+
+## DevOps & Monitoring
+
+* Docker
+* GitHub Actions
+* Redis
+* Prometheus Metrics
+
+---
+
+# 📂 Repository Structure
 
 ```text
 .
-|-- ai/                         # Intent + SQL generation helpers
-|-- backend/
-|   |-- api/                    # FastAPI routers
-|   |-- models/                 # Pydantic models
-|   |-- services/               # ORM models + business logic
-|   |-- config.py               # Environment-driven settings
-|   `-- main.py                 # FastAPI entrypoint
-|-- voice/                      # Bhashini/Twilio wrappers
-|-- frontend/                   # React app
-|-- data/
-|   |-- databases/schema.sql
-|   `-- sample_data/            # Odisha-focused seed CSVs
-|-- scripts/
-|   |-- setup_database.py
-|   |-- seed_data.py
-|   `-- run_tests.py
-|-- deployment/                 # Dockerfiles + compose + nginx config
-`-- .github/workflows/ci.yml
+├── ai/                          # Intent classification & SQL generation
+├── backend/
+│   ├── api/                     # FastAPI route handlers
+│   ├── models/                  # Pydantic schemas
+│   ├── services/                # ORM models & business logic
+│   ├── config.py                # Environment configuration
+│   └── main.py                  # FastAPI entrypoint
+├── frontend/                    # React frontend application
+├── voice/                       # Bhashini & Twilio integrations
+├── data/
+│   ├── databases/schema.sql
+│   └── sample_data/             # Odisha-focused seed datasets
+├── scripts/
+│   ├── setup_database.py
+│   ├── seed_data.py
+│   └── run_tests.py
+├── deployment/                  # Docker & deployment assets
+└── .github/workflows/ci.yml
 ```
 
-## Quick Start (Windows PowerShell)
+---
 
-1. Create and activate a virtual environment:
+# ⚡ Quick Start
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/shreyy-20/NL_to_SQL_Analytics_Plaform.git
+cd NL_to_SQL_Analytics_Plaform
+```
+
+---
+
+## 2️⃣ Create Virtual Environment
+
+### Windows PowerShell
 
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-2. Install backend dependencies:
+---
 
-```powershell
-python -m pip install -r requirements.txt
+## 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
 ```
 
-3. Create your local environment file:
+---
+
+## 4️⃣ Configure Environment Variables
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-4. Initialize and seed the database:
+Update required variables:
 
-```powershell
+```env
+DATABASE_URL=
+API_KEY=
+JWT_SECRET_KEY=
+ENVIRONMENT=development
+```
+
+---
+
+## 5️⃣ Initialize Database
+
+```bash
 python scripts/setup_database.py --drop
 python scripts/seed_data.py
 ```
 
-5. Start backend:
+---
+
+## 6️⃣ Start Backend Server
 
 ```powershell
 .\start_backend.ps1 -Reload
 ```
 
-6. In a new terminal, start frontend:
+Backend runs at:
 
-```powershell
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 7️⃣ Start Frontend
+
+```bash
 cd frontend
 npm install
 npm start
 ```
 
-7. Open:
+Frontend runs at:
 
-- API docs: `http://127.0.0.1:8000/docs`
-- Health check: `http://127.0.0.1:8000/health`
-- Frontend: `http://localhost:3000`
+```text
+http://localhost:3000
+```
 
-## API Overview
+---
 
-Base API groups:
+# 📡 API Endpoints
 
-- `/api/farmers`
-- `/api/queries`
-- `/api/dashboard`
-- `/api/voice`
+## Core APIs
 
-Platform endpoints:
+| Endpoint         | Description                   |
+| ---------------- | ----------------------------- |
+| `/api/farmers`   | Farmer records                |
+| `/api/queries`   | Natural language query engine |
+| `/api/dashboard` | Dashboard analytics           |
+| `/api/voice`     | Voice APIs                    |
 
-- `GET /` basic service metadata
-- `GET /health` health check (database/model/redis status)
-- `GET /metrics` Prometheus metrics
+---
 
-Key examples:
+## Platform Endpoints
 
-- `GET /api/farmers/{phone}`
-- `GET /api/farmers/{farmer_id}/payments`
-- `GET /api/farmers/{farmer_id}/soil-health`
-- `POST /api/queries/`
-- `GET /api/dashboard/stats`
-- `POST /api/voice/stt` (when voice is enabled)
+| Endpoint       | Purpose            |
+| -------------- | ------------------ |
+| `GET /`        | Service metadata   |
+| `GET /health`  | Health monitoring  |
+| `GET /metrics` | Prometheus metrics |
 
-Example query request:
+---
+
+## Example Query Request
 
 ```bash
 curl -X POST "http://127.0.0.1:8000/api/queries/" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "question": "Did my PM-KISAN installment come?",
-    "phone_number": "9876543210",
-    "language": "en"
-  }'
+-H "Content-Type: application/json" \
+-d '{
+  "question": "Did my PM-KISAN installment come?",
+  "phone_number": "9876543210",
+  "language": "en"
+}'
 ```
 
-## Configuration
+---
 
-Primary settings are loaded from `.env` via `backend/config.py`.
+# 🐳 Docker Deployment
 
-Important variables:
-
-- `DATABASE_URL` required, defaults to local SQLite in `.env.example`
-- `API_KEY` required
-- `JWT_SECRET_KEY` required
-- `ENVIRONMENT` `development` or `production`
-- `DEBUG` `true`/`false`
-- `CORS_ORIGINS` JSON array or comma-separated list
-- `ALLOWED_HOSTS` JSON array or comma-separated list
-- `ENABLE_VOICE` toggle voice APIs
-- `ENABLE_IVR` toggle IVR APIs
-- `REDIS_URL` optional cache backend
-- `BHASHINI_API_KEY` optional for live STT/TTS
-- `TWILIO_*` optional for IVR calling
-
-## Running with Docker Compose
-
-From repository root:
+Run the full platform using Docker Compose:
 
 ```bash
 docker compose -f deployment/docker-compose.yml up --build
 ```
 
-This composes:
+This provisions:
 
-- PostgreSQL
-- Redis
-- FastAPI backend
-- Frontend (Nginx container)
-- Optional reverse proxy service
+* FastAPI backend
+* React frontend
+* PostgreSQL
+* Redis
+* Optional reverse proxy
 
-Before production-style runs, set secure values for DB credentials and secrets in environment variables.
+---
 
-## Deploy on Render
+# ☁ Deployment on Render
 
-1. Push latest code to GitHub (including `render.yaml`).
-2. Open the Deploy to Render button above.
-3. Select your Render workspace and create resources.
-4. Wait for first deploy to finish for both services:
-   - `krishiquery-backend`
-   - `krishiquery-frontend`
-5. Open the frontend `.onrender.com` URL and test the demo.
+The repository includes a ready-to-deploy `render.yaml` blueprint.
 
-The Blueprint provisions:
+## Deployment Steps
 
-- Public static frontend service
-- Public FastAPI backend service
-- Managed Postgres database
-- Automatic DB setup and sample data seeding on backend startup
+1. Push repository to GitHub
+2. Open Render Blueprint deploy
+3. Create Render services
+4. Wait for deployment completion
 
-## CI/CD
+Generated services:
 
-GitHub Actions workflow: `.github/workflows/ci.yml`
+* `krishiquery-backend`
+* `krishiquery-frontend`
 
-Current behavior on push to `main`:
+---
 
-1. Checkout source
-2. Set up Python 3.10
-3. Install `requirements.txt`
-4. Run `python scripts/run_tests.py`
+# 🔄 CI/CD Pipeline
 
-## Developer Utilities
+GitHub Actions workflow automatically:
 
-- `scripts/setup_database.py` create/drop tables
-- `scripts/seed_data.py` load sample CSV data
-- `complete_setup.py` legacy wrapper for setup + seed
-- `create_tables.py` legacy wrapper for table recreation
-- `start_backend.ps1` standard backend launcher using project `venv`
+* Installs dependencies
+* Validates builds
+* Runs project tests on push
 
-## Notes and Operational Guidance
+Workflow file:
 
-- Voice and IVR are disabled by default in `.env.example`.
-- If intent model files are not present, the app falls back to rule-based intent handling.
-- SQL generation includes validator checks and runtime SELECT-only safety guards.
-- If your repo is inside OneDrive, keep SQLite DB files in a non-synced temp path (as shown in `.env.example`) to reduce lock conflicts.
+```text
+.github/workflows/ci.yml
+```
 
-## Troubleshooting
+---
 
-- `git push` says up-to-date but changes are missing:
-  - run `git add .`
-  - run `git commit -m "your message"`
-  - run `git push origin main`
-- Backend fails to start:
-  - verify `.env` exists
-  - verify `DATABASE_URL`
-  - run `python scripts/setup_database.py --drop` again
-- Frontend cannot reach backend:
-  - ensure backend is on port `8000`
-  - ensure frontend runs from `frontend/` on port `3000`
+# 📈 Monitoring & Observability
 
-## License
+KrishiQuery includes:
 
-No license file is currently included in this repository.
+* Health monitoring APIs
+* Prometheus metrics endpoint
+* Redis cache support
+* Runtime validation systems
+
+Metrics endpoint:
+
+```text
+/metrics
+```
+
+---
+
+# 🛡 Security Features
+
+* SQL Injection prevention
+* SELECT-only SQL execution
+* Runtime query validation
+* Environment-based secret management
+* CORS & host restrictions
+
+---
+
+# 🧪 Developer Utilities
+
+| Script              | Purpose               |
+| ------------------- | --------------------- |
+| `setup_database.py` | Create/reset database |
+| `seed_data.py`      | Load seed datasets    |
+| `run_tests.py`      | Execute tests         |
+| `start_backend.ps1` | Backend launcher      |
+
+---
+
+# ⚠ Notes
+
+* Voice and IVR modules are disabled by default.
+* Free-tier deployments may enter sleep mode when idle.
+* SQLite is recommended only for local development.
+* PostgreSQL is recommended for production deployments.
+
+---
+
+# 🔧 Troubleshooting
+
+## Backend Not Starting
+
+* Verify `.env` configuration
+* Validate `DATABASE_URL`
+* Re-run database setup scripts
+
+---
+
+## Frontend Cannot Connect to Backend
+
+Ensure:
+
+* Backend runs on port `8000`
+* Frontend runs on port `3000`
+
+---
+
+## Git Changes Not Reflecting
+
+```bash
+git add .
+git commit -m "Update"
+git push origin main
+```
+
+---
+
+# 🌱 Future Enhancements
+
+* Real AI/LLM-powered query generation
+* Regional language expansion
+* Live mandi API integrations
+* Farmer recommendation engine
+* Mobile application support
+* AI-based crop advisory system
+
+---
+
+# 📜 License
+
+This repository currently does not include a license file.
+
+---
+
+# 👨‍💻 Author
+
+Developed as an AI-powered agricultural analytics solution focused on improving accessibility, transparency, and operational efficiency in Indian agricultural ecosystems.
