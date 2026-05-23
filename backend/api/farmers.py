@@ -35,7 +35,7 @@ def _serialize_payment(payment) -> PaymentResponse:
 
 
 @router.get("/", response_model=FarmerListResponse)
-async def list_farmers(
+def list_farmers(
     skip: int = Query(0, ge=0, description="Number of records to skip"),
     limit: int = Query(100, ge=1, le=1000, description="Number of records to return"),
     district: Optional[str] = Query(None, description="Filter by district"),
@@ -66,7 +66,7 @@ async def list_farmers(
 
 
 @router.get("/search/by-name", response_model=List[FarmerResponse])
-async def search_farmers_by_name(
+def search_farmers_by_name(
     name: str = Query(..., min_length=2, description="Farmer name to search"),
     limit: int = Query(20, ge=1, le=100, description="Maximum results"),
     db: Session = Depends(get_db_dependency),
@@ -86,7 +86,7 @@ async def search_farmers_by_name(
 
 
 @router.get("/districts/list")
-async def get_districts(db: Session = Depends(get_db_dependency)):
+def get_districts(db: Session = Depends(get_db_dependency)):
     """Get list of all districts in the database."""
     try:
         districts = (
@@ -102,7 +102,7 @@ async def get_districts(db: Session = Depends(get_db_dependency)):
 
 
 @router.get("/statistics/summary")
-async def get_farmer_statistics(db: Session = Depends(get_db_dependency)):
+def get_farmer_statistics(db: Session = Depends(get_db_dependency)):
     """Get summary statistics about farmers and market data."""
     try:
         total_farmers = db.query(func.count(farmer_service.Farmer.farmer_id)).scalar() or 0
@@ -144,7 +144,7 @@ async def get_farmer_statistics(db: Session = Depends(get_db_dependency)):
 
 
 @router.get("/{farmer_id}/payments", response_model=List[PaymentResponse])
-async def get_farmer_payments(
+def get_farmer_payments(
     farmer_id: int,
     scheme: Optional[str] = Query(None, description="Filter by scheme (pmkisan/kalia)"),
     limit: int = Query(50, ge=1, le=200, description="Number of payments to return"),
@@ -168,7 +168,7 @@ async def get_farmer_payments(
 
 
 @router.get("/{farmer_id}/soil-health")
-async def get_soil_health(
+def get_soil_health(
     farmer_id: int,
     db: Session = Depends(get_db_dependency),
 ):
@@ -198,7 +198,7 @@ async def get_soil_health(
 
 
 @router.get("/{phone}", response_model=FarmerResponse)
-async def get_farmer_by_phone(
+def get_farmer_by_phone(
     phone: str = Path(..., pattern=r"^[6-9]\d{9}$"),
     db: Session = Depends(get_db_dependency),
 ):

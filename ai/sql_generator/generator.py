@@ -8,6 +8,7 @@ import re
 from typing import Dict, Any, Optional, List
 import json
 from pathlib import Path
+import os
 
 from ai.sql_generator.prompt_templates import SQLPromptTemplates, get_sql_prompt
 from ai.sql_generator.validator import SQLValidator
@@ -17,8 +18,9 @@ logger = logging.getLogger(__name__)
 class SQLGenerator:
     """Generate SQL queries from natural language"""
     
-    def __init__(self, model_type: str = "local"):
-        self.model_type = model_type
+    def __init__(self, model_type: Optional[str] = None):
+        # Default to 'template' to prevent massive LLM loading delays on Render
+        self.model_type = model_type or os.getenv("SQL_MODEL_TYPE", "template")
         self.validator = SQLValidator()
         self._model = None
         self._tokenizer = None
@@ -340,7 +342,7 @@ def get_sql_generator() -> SQLGenerator:
     """Get singleton SQL generator instance"""
     global _sql_generator
     if _sql_generator is None:
-        _sql_generator = SQLGenerator()
+        _sql_generator = SQLGenerator(model_type=os.getenv("SQL_MODEL_TYPE", "template"))
     return _sql_generator
 
 def generate_sql(

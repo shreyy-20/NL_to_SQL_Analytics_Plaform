@@ -132,7 +132,7 @@ async def health_check():
     """Health check endpoint for monitoring"""
     health_status = {
         "status": "healthy",
-        "timestamp": "2024-01-01T00:00:00Z",
+        "timestamp": "2026-01-01T00:00:00Z",
         "services": {
             "database": "unknown",
             "redis": "unknown",
