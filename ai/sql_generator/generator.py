@@ -200,7 +200,7 @@ class SQLGenerator:
                 UNION ALL
                 
                 SELECT 
-                    CONCAT('KALIA-', scheme_type) as scheme_name,
+                    'KALIA-' || scheme_type as scheme_name,
                     amount,
                     payment_date,
                     status,
